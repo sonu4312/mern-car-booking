@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-
+import {CarType} from "../../backend/src/shared/types"
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const register = async (formData: RegisterFormData) => {
@@ -53,7 +53,7 @@ export const validateToken = async () => {
 export const signOut = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
     credentials: "include",
-    method:"POST",
+    method: "POST",
   });
   if (!response.ok) {
     throw new Error("Error during sign out");
@@ -67,8 +67,20 @@ export const addMyCar = async (carFormData: FormData) => {
     body: carFormData,
   });
 
-  if(!response.ok){
+  if (!response.ok) {
     throw new Error("failed to add car");
   }
+  return response.json();
+};
+
+export const fetchMyCars = async (): Promise<CarType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-cars`, {
+    credentials: "include",
+  });
+  
+  if (!response.ok) {
+    throw new Error("Error fetching cars");
+  }
+
   return response.json();
 };

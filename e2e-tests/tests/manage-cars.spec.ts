@@ -41,3 +41,19 @@ test("should allow user to add a car", async ({ page }) => {
   await page.getByRole("button", { name: "Save" }).click();
   await expect(page.getByText("Car Saved!")).toBeVisible;
 });
+
+test("should display cars",async({page})=>{
+  await page.goto(`${UI_URL}/my-cars`);
+
+  await expect(page.getByText("test car")).toBeVisible();
+  await expect(page.getByText("This is description")).toBeVisible();
+
+  await expect(page.getByText("test city,test country")).toBeVisible();
+  await expect(page.getByText("Economy")).toBeVisible();
+  await expect(page.getByText("100 per day")).toBeVisible();
+  await expect(page.getByText("2 passangers")).toBeVisible();
+  await expect(page.getByText("3 Star Rating")).toBeVisible();
+
+  await expect(page.getByRole("link",{name:"View Details"})).toBeVisible();
+  await expect(page.getByRole("link",{name:"Add Car"})).toBeVisible();
+})
