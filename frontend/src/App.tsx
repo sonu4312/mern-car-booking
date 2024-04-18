@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import AddCar from "./pages/AddCar";
 import { useAppContext } from "./contexts/AppContext";
 import MyCars from "./pages/MyCar";
+import EditCar from "./pages/EditCar";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -52,12 +53,20 @@ const App = () => {
         />
 
         {isLoggedIn && (
-          <>
-            <Route
+          <> 
+          <Route
               path="/add-car"
               element={
                 <Layout>
                   <AddCar />
+                </Layout>
+              }
+            />
+            <Route
+              path="/edit-car/:carId"
+              element={
+                <Layout>
+                  <EditCar />
                 </Layout>
               }
             />

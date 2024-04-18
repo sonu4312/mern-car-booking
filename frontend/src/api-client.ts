@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-import {CarType} from "../../backend/src/shared/types"
+import { CarType } from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const register = async (formData: RegisterFormData) => {
@@ -77,10 +77,37 @@ export const fetchMyCars = async (): Promise<CarType[]> => {
   const response = await fetch(`${API_BASE_URL}/api/my-cars`, {
     credentials: "include",
   });
-  
+
   if (!response.ok) {
     throw new Error("Error fetching cars");
   }
 
+  return response.json();
+};
+
+export const fetchMyCarById = async (carId: string): Promise<CarType> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-cars/${carId}`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error Fetching Cars");
+  }
+
+  return response.json();
+};
+
+export const updateMyCarById = async (carFormData: FormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-cars/${carFormData.get("carId")}`,
+    {
+      method: "PUT",
+      body: carFormData,
+      credentials: "include",
+    }
+  );
+  if(!response.ok){
+    throw new Error("Failed to updated Car")
+  }
   return response.json();
 };

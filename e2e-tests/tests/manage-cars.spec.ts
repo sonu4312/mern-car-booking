@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+
 import path from "path";
 
 const UI_URL = "http://localhost:5173";
@@ -42,18 +43,38 @@ test("should allow user to add a car", async ({ page }) => {
   await expect(page.getByText("Car Saved!")).toBeVisible;
 });
 
-test("should display cars",async({page})=>{
+test("should display cars", async ({ page }) => {
   await page.goto(`${UI_URL}/my-cars`);
 
-  await expect(page.getByText("test car")).toBeVisible();
-  await expect(page.getByText("This is description")).toBeVisible();
+  await expect(page.locator('text="test car"').first()).toBeVisible();
+  await expect(
+    page.locator('text="This is description of test"').first()
+  ).toBeVisible();
 
-  await expect(page.getByText("test city,test country")).toBeVisible();
-  await expect(page.getByText("Economy")).toBeVisible();
-  await expect(page.getByText("100 per day")).toBeVisible();
-  await expect(page.getByText("2 passangers")).toBeVisible();
-  await expect(page.getByText("3 Star Rating")).toBeVisible();
+  await expect(
+    page.locator('text="test city,test country"').first()
+  ).toBeVisible();
+  await expect(page.locator('text="Economy"').first()).toBeVisible();
+  await expect(page.locator('text="100 per day"').first()).toBeVisible();
+  await expect(page.locator('text="2 passangers"').first()).toBeVisible();
+  await expect(page.locator('text="3 Star Rating"').first()).toBeVisible();
 
-  await expect(page.getByRole("link",{name:"View Details"})).toBeVisible();
-  await expect(page.getByRole("link",{name:"Add Car"})).toBeVisible();
-})
+  await expect(page.locator('text="View Details"').first()).toBeVisible();
+  await expect(page.locator('text="Add Car"').first()).toBeVisible();
+});
+
+test("should edit car", async ({ page }) => {
+  await page.goto(`${UI_URL}/my-cars`);
+
+  await page.getByRole("link", { name: "View Details" }).first().click();
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue("test car");
+  await page.locator('[name="name"]').fill("test car updated");
+  await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.getByText("Car Saved!")).toBeVisible();
+
+  await page.reload();
+  await expect(page.locator('[name="name"]')).toHaveValue("test car updated");
+  await page.locator('[name="name"]').fill("test car");
+  await page.getByRole("button", { name: "Save" }).click();
+});

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
-import {BsCarFront, BsPeopleFill } from "react-icons/bs";
+import { BsCarFront, BsPeopleFill } from "react-icons/bs";
 import { BiDollar, BiLocationPlus, BiStar } from "react-icons/bi";
 
 const MyCars = () => {
@@ -33,32 +33,34 @@ const MyCars = () => {
             <div className="whitespace-pre-line">{car.description}</div>
             <div className="grid grid-cols-5 gap-2">
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiLocationPlus className="mr-1"/>
+                <BiLocationPlus className="mr-1" />
                 {car.city},{car.country}
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BsCarFront className="mr-1"/>
+                <BsCarFront className="mr-1" />
                 {car.type}
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiDollar className="mr-1"/>
+                <BiDollar className="mr-1" />
                 {car.pricePerDay} per day
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BsPeopleFill className="mr-1"/>
+                <BsPeopleFill className="mr-1" />
                 {car.passengerCount} passangers
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiStar className="mr-1"/>
+                <BiStar className="mr-1" />
                 {car.starRating} Star Rating
               </div>
             </div>
             <span className="flex justify-end">
-                <Link to={`/edit-hotel/${car._id}`} className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500">
-                    View Details
-                </Link>
+              <Link
+                to={`/edit-car/${car._id}`}
+                className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
+              >
+                View Details
+              </Link>
             </span>
-
           </div>
         ))}
       </div>
