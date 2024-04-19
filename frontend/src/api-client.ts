@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-import { CarType } from "../../backend/src/shared/types";
+import { CarSearchResponse, CarType } from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const register = async (formData: RegisterFormData) => {
@@ -106,8 +106,50 @@ export const updateMyCarById = async (carFormData: FormData) => {
       credentials: "include",
     }
   );
-  if(!response.ok){
-    throw new Error("Failed to updated Car")
+  if (!response.ok) {
+    throw new Error("Failed to updated Car");
   }
+  return response.json();
+};
+
+export type SearchParams = {
+  destination?: string;
+  fromDate?: string;
+  toDate?: string;
+  passengerCount?: string;
+  page?: string;
+  facilities?:string[];
+  types?:string[];
+  stars?:string[];
+  maxPrice?:string;
+  sortOption?:string;
+};
+
+export const searchCars = async (searchParams: SearchParams):Promise<CarSearchResponse> => {
+  const queryParams = new URLSearchParams();
+  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("fromDate", searchParams.fromDate || "");
+  queryParams.append("toDate", searchParams.toDate || "");
+  queryParams.append("passengerCount", searchParams.passengerCount || "");
+  queryParams.append("page", searchParams.page || "");
+
+  queryParams.append("maxPrice",searchParams.maxPrice || "");
+  queryParams.append("sortOption", searchParams.sortOption || "");
+
+  searchParams.facilities?.forEach((facility) =>
+    queryParams.append("facilities", facility)
+  );
+
+  searchParams.types?.forEach((type) => queryParams.append("types", type));
+  searchParams.stars?.forEach((star) => queryParams.append("stars", star));
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/cars/search?${queryParams}`
+  );
+
+  if(!response.ok){
+    throw new Error("Error fetching cars");
+  }
+
   return response.json();
 };

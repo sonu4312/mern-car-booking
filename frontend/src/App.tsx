@@ -11,6 +11,7 @@ import AddCar from "./pages/AddCar";
 import { useAppContext } from "./contexts/AppContext";
 import MyCars from "./pages/MyCar";
 import EditCar from "./pages/EditCar";
+import Search from "./pages/Search";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -25,14 +26,14 @@ const App = () => {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/search"
           element={
             <Layout>
-              <p>Search Page</p>
+              <Search/>
             </Layout>
           }
-        />
+        /> */}
 
         <Route
           path="/register"
@@ -54,6 +55,14 @@ const App = () => {
 
         {isLoggedIn && (
           <> 
+          <Route
+          path="/search"
+          element={
+            <Layout>
+              <Search/>
+            </Layout>
+          }
+        />
           <Route
               path="/add-car"
               element={
