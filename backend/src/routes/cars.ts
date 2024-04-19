@@ -1,8 +1,12 @@
 import express, { Request, Response } from "express";
 import Car from "../models/cars";
 import { CarSearchResponse } from "../shared/types";
+import { param, validationResult } from "express-validator";
 
 const router = express.Router();
+
+
+
 router.get("/search", async (req: Request, res: Response) => {
   try {
     const query = constructSearchQuery(req.query);
@@ -48,6 +52,29 @@ router.get("/search", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+router.get(
+  "/:id",
+  [param("id").notEmpty().withMessage("Car ID is required")],
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const id = req.params.id.toString();
+
+    try {
+      const car = await Car.findById(id);
+      res.json(car);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error fetching car" });
+    }
+  }
+);
+
 const constructSearchQuery = (queryParams: any) => {
   let constructedQuery: any = {};
   if (queryParams.destination) {

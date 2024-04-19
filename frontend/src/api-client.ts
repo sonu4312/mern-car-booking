@@ -118,14 +118,16 @@ export type SearchParams = {
   toDate?: string;
   passengerCount?: string;
   page?: string;
-  facilities?:string[];
-  types?:string[];
-  stars?:string[];
-  maxPrice?:string;
-  sortOption?:string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOption?: string;
 };
 
-export const searchCars = async (searchParams: SearchParams):Promise<CarSearchResponse> => {
+export const searchCars = async (
+  searchParams: SearchParams
+): Promise<CarSearchResponse> => {
   const queryParams = new URLSearchParams();
   queryParams.append("destination", searchParams.destination || "");
   queryParams.append("fromDate", searchParams.fromDate || "");
@@ -133,7 +135,7 @@ export const searchCars = async (searchParams: SearchParams):Promise<CarSearchRe
   queryParams.append("passengerCount", searchParams.passengerCount || "");
   queryParams.append("page", searchParams.page || "");
 
-  queryParams.append("maxPrice",searchParams.maxPrice || "");
+  queryParams.append("maxPrice", searchParams.maxPrice || "");
   queryParams.append("sortOption", searchParams.sortOption || "");
 
   searchParams.facilities?.forEach((facility) =>
@@ -147,9 +149,18 @@ export const searchCars = async (searchParams: SearchParams):Promise<CarSearchRe
     `${API_BASE_URL}/api/cars/search?${queryParams}`
   );
 
-  if(!response.ok){
+  if (!response.ok) {
     throw new Error("Error fetching cars");
   }
 
+  return response.json();
+};
+
+export const fetchCarById = async (carId: string): Promise<CarType> => {
+  const response = await fetch(`${API_BASE_URL}/api/cars/${carId}`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching cars");
+  }
   return response.json();
 };
