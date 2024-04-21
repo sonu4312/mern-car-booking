@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-import { BiCheckCircle } from "react-icons/bi";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 // const MyBookings = () => {
