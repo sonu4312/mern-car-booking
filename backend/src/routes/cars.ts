@@ -55,6 +55,16 @@ router.get("/search", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const cars = await Car.find().sort("-lastUpdated");
+    res.json(cars);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error fetching cars" });
+  }
+});
+
 router.get(
   "/:id",
   [param("id").notEmpty().withMessage("Car ID is required")],

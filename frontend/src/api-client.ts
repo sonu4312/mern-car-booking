@@ -173,6 +173,14 @@ export const searchCars = async (
   return response.json();
 };
 
+export const fetchCars = async (): Promise<CarType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/cars`);
+  if (!response.ok) {
+    throw new Error("Error");
+  }
+  return response.json();
+};
+
 export const fetchCarById = async (carId: string): Promise<CarType> => {
   const response = await fetch(`${API_BASE_URL}/api/cars/${carId}`);
 
