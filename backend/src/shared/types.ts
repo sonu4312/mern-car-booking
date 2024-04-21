@@ -1,3 +1,11 @@
+export type UserType = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
+
 export type CarType = {
   _id: string;
   userId: string;
@@ -12,6 +20,19 @@ export type CarType = {
   starRating: number;
   lastUpdated: Date;
   imageUrls: string[];
+  bookings: BookingType[];
+};
+
+export type BookingType = {
+  _id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  passengerCount: number;
+  fromDate: Date;
+  toDate: Date;
+  totalCost: number;
 };
 
 export type CarSearchResponse = {
@@ -21,4 +42,10 @@ export type CarSearchResponse = {
     page: number;
     pages: number;
   };
+};
+
+export type PaymentIntentResponse = {
+  paymentIntentId: string;
+  clientSecret: string;
+  totalCost: number;
 };

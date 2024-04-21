@@ -24,11 +24,25 @@ type SearchContextProviderProps = {
 export const SearchContextProvider = ({
   children,
 }: SearchContextProviderProps) => {
-  const [destination, setDestination] = useState<string>("");
-  const [fromDate, setFromDate] = useState<Date>(new Date());
-  const [toDate, setToDate] = useState<Date>(new Date());
-  const [passengerCount, setPassenerCount] = useState<number>(1);
-  const [carId, setCarId] = useState<string>("");
+  const [destination, setDestination] = useState<string>(
+    () => sessionStorage.getItem("destination") || ""
+  );
+  
+  const [fromDate, setFromDate] = useState<Date>(
+    () =>
+      new Date(sessionStorage.getItem("fromDate") || new Date().toISOString())
+  );
+
+  const [toDate, setToDate] = useState<Date>(
+    () => new Date(sessionStorage.getItem("toDate") || new Date().toISOString())
+  );
+  const [passengerCount, setPassenerCount] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("passengerCount") || "1")
+  );
+
+  const [carId, setCarId] = useState<string>(
+    () => sessionStorage.getItem("carId") || ""
+  );
 
   const saveSearchValues = (
     destination: string,
@@ -43,6 +57,15 @@ export const SearchContextProvider = ({
     setPassenerCount(passengerCount);
     if (carId) {
       setCarId(carId);
+    }
+
+    sessionStorage.setItem("destination", destination);
+    sessionStorage.setItem("fromDate", fromDate.toISOString());
+    sessionStorage.setItem("toDate", toDate.toISOString());
+    sessionStorage.setItem("passengerCount", passengerCount.toString());
+
+    if (carId) {
+      sessionStorage.setItem("carId", carId);
     }
   };
 

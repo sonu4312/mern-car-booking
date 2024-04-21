@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
-import { CarType } from "../shared/types";
+import { BookingType, CarType } from "../shared/types";
 
-
+const bookingSchema = new mongoose.Schema<BookingType>({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  passengerCount: { type: Number, required: true },
+  fromDate: { type: Date, required: true },
+  toDate: { type: Date, required: true },
+  userId: { type: String, required: true },
+  totalCost: { type: Number, required: true },
+});
 
 const carSchema = new mongoose.Schema<CarType>({
   userId: { type: String, required: true },
@@ -16,6 +25,7 @@ const carSchema = new mongoose.Schema<CarType>({
   starRating: { type: Number, required: true, min: 1, max: 5 },
   imageUrls: [{ type: String, required: true }],
   lastUpdated: { type: Date, required: true },
+  bookings:[bookingSchema],
 });
 
 const Car = mongoose.model<CarType>("Car", carSchema);

@@ -13,6 +13,8 @@ import MyCars from "./pages/MyCar";
 import EditCar from "./pages/EditCar";
 import Search from "./pages/Search";
 import Detail from "./pages/Detail";
+import Booking from "./pages/Booking";
+import MyBookings from "./pages/MyBookings";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -64,6 +66,14 @@ const App = () => {
 
         {isLoggedIn && (
           <>
+          <Route
+              path="/car/:carId/booking"
+              element={
+                <Layout>
+                  <Booking/>
+                </Layout>
+              }
+            />
             <Route
               path="/add-car"
               element={
@@ -85,6 +95,14 @@ const App = () => {
               element={
                 <Layout>
                   <MyCars />
+                </Layout>
+              }
+            />
+            <Route
+              path="/my-bookings"
+              element={
+                <Layout>
+                  <MyBookings />
                 </Layout>
               }
             />
