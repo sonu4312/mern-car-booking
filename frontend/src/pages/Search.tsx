@@ -67,8 +67,8 @@ const Search = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border-slate-300 p-5 h-fit top-10">  {/*sticky removed*/}
+    <div className="grid grid-cols-[1fr_2fr] lg:grid-cols-[250px_1fr] gap-5">
+      <div className="sticky rounded-lg border-slate-300 p-5 h-fit top-10 sm:text-sm lg:text-lg">  {/*sticky removed*/}
         <div className="space-y-5">
           <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
             Filter by:
