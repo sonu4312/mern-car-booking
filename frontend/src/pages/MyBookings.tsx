@@ -1,5 +1,7 @@
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
+import { BiCheckCircle } from "react-icons/bi";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 // const MyBookings = () => {
 //   const { data: cars } = useQuery("fetchMyBookings", apiClient.fetchMyBookings);
@@ -34,22 +36,33 @@ const MyBookings = () => {
               </div>
             </div>
             {car.bookings.map((booking) => (
-            <div>
               <div>
-                <span className="font-bold mr-2">Dates:</span>
-                <span>
-                  {new Date(booking.fromDate).toDateString()} -{" "}
-                  {new Date(booking.toDate).toDateString()}
-                </span>
+                <div>
+                  <span className="font-bold mr-2">Dates:</span>
+                  <span>
+                    {new Date(booking.fromDate).toDateString()} -{" "}
+                    {new Date(booking.toDate).toDateString()}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Passengers: </span>
+                  <span>{booking.passengerCount}</span>
+                </div>
+                {/* <div className="flex flex-col-1 gap-0">
+                  <span className="font-bold">Status:</span>
+
+                  <div>
+                    Booked
+                    <BsCheckCircleFill className=" fill-green-600 flex flex-1" />
+                  </div>
+                </div> */}
+                <div className="flex flex-col-1 gap-0">
+                  <span className="font-bold">Status:</span> <span>Booked</span>
+                  <BsCheckCircleFill className="fill-green-600 flex flex-1" />
+                </div>
               </div>
-              <div>
-                <span className="font-bold mr-2">Passengers: </span>
-                <span>{booking.passengerCount}</span>
-              </div>
-            </div>
-          ))}
+            ))}
           </div>
-          
         </div>
       ))}
     </div>
