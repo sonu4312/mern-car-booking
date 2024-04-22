@@ -25,7 +25,7 @@ test("should show car search results", async ({ page }) => {
   await page.getByRole("button", { name: "Search" }).click();
 
   await expect(page.getByText("Car found in mumbai")).toBeVisible();
-  await expect(page.getByText("Hyundai").first()).toBeVisible();
+  await expect(page.getByText("test car").first()).toBeVisible();
 });
 
 test("should show car detail", async ({ page }) => {
@@ -34,7 +34,7 @@ test("should show car detail", async ({ page }) => {
   await page.getByPlaceholder("Enter your Destination").fill("mumbai");
   await page.getByRole("button", { name: "Search" }).click();
 
-  await page.getByText("Hyundai").click();
+  await page.getByText("test car").click();
   await expect(page).toHaveURL(/detail/);
   await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
 

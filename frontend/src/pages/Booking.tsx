@@ -19,7 +19,7 @@ const Booking = () => {
     if (search.fromDate && search.toDate) {
       const days =
         Math.abs(search.fromDate.getTime() - search.toDate.getTime()) /
-        (1000 * 60 * 60 * 24);
+        (1000 * 60 * 60 * 24); //total miliseconds from the jan1,1970/ms*min*hour*day
       setNumberOfDays(Math.ceil(days));
     }
   }, [search.fromDate, search.toDate]);
