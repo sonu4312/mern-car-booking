@@ -2,7 +2,8 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { BsCarFront, BsPeopleFill } from "react-icons/bs";
-import { BiDollar, BiLocationPlus, BiStar } from "react-icons/bi";
+import { BiLocationPlus, BiStar } from "react-icons/bi";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 
 const MyCars = () => {
   const { data: carData } = useQuery("fetchMyCars", apiClient.fetchMyCars, {
@@ -41,7 +42,7 @@ const MyCars = () => {
                 {car.type}
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
-                <BiDollar className="mr-1" />
+                <FaIndianRupeeSign className="mr-1" />
                 {car.pricePerDay} per day
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
