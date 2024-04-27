@@ -119,4 +119,10 @@ Clone the project and go to the project directory.
      - ../frontend>`npm run dev`.
      - ../backend>`npm run e2e`.
    - Navigate to the frontend url and add some cars and data for running the test and see the steps for running test in playwright. [steps for running playwright test](https://playwright.dev/docs/getting-started-vscode#running-tests).
+  
+
+### Deployement
+
+- Deployed frontend and backend both on same server by compiling typescript code to the javascript and host the application in live environment using [render](https://render.com/)
+- My Web Application is now live on: **[https://renthub-7gz2.onrender.com](https://renthub-7gz2.onrender.com)**
     
