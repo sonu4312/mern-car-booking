@@ -61,7 +61,7 @@ Clone the project and go to the project directory.
 - For the `.env.e2e` setup see "running automated tests" below.
 
 3. **Cloudinary Setup**:
-- Create an account at [Cloudinary](https://cloudinary.com/).\
+- Create an account at [Cloudinary](https://cloudinary.com/).
 - Navigate to your dashboard to find your cloud name, API key, and API secret.
 - Add these details to the respective `CLOUDINARY_*` variables in your `.env` and `.env.e2e` files.
 
@@ -112,7 +112,7 @@ Clone the project and go to the project directory.
    - Obtain the connnection string and add it to the `MONGODB_CONNECTION_STRING` variable in your `env.e2e` file.
 
 2. **Running tests**
-   - In VS code install the Playwright extension [Playwright extension]((https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
+   - In VS code install the [Playwright extension](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
    - Navigate to the `backend` directory.
    - Install dependencies: `npm install`
    - Start the frontend and backend as :
