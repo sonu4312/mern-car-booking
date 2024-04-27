@@ -116,7 +116,7 @@ Clone the project and go to the project directory.
    - Navigate to the `backend` directory.
    - Install dependencies: `npm install`
    - Start the frontend and backend as :
-       -- ../frontend>`npm run dev`.
-       -- ../backend>`npm run e2e`.
+     - ../frontend>`npm run dev`.
+     - ../backend>`npm run e2e`.
    - Navigate to the frontend url and add some cars and data for running the test and see the steps for running test in playwright. [steps for running playwright test](https://playwright.dev/docs/getting-started-vscode#running-tests).
     
