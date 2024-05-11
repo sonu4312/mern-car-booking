@@ -26,7 +26,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
-             <Home/>
+              <Home />
             </Layout>
           }
         />
@@ -67,11 +67,11 @@ const App = () => {
 
         {isLoggedIn && (
           <>
-          <Route
+            <Route
               path="/car/:carId/booking"
               element={
                 <Layout>
-                  <Booking/>
+                  <Booking />
                 </Layout>
               }
             />
